@@ -11,20 +11,20 @@ function buildRequestURL(repoOwner, repoName){
 
 function getRepoContributors(repoOwner, repoName, cb) {
   // TODO implement the function
-  let url = buildRequestURL(repoOwner, repoName);
+  let queryUrl = buildRequestURL(repoOwner, repoName);
 
-  request.get(url)
-         .on('error', (err) => {
-            throw err;
-          })
-         .on('response', (response) => {
-            console.log('Response Status Code: ', response.statusCode);
-            console.log('Response Status Message:', response.statusMessage);
-            // console.log(response);
-         });
+  var options = {
+    url: queryUrl,
+    headers: {
+      'User-Agent': "GitHub Avatar Downloader - Student Project"
+    }
+  };
+
+  request(options, cb);
 }
 
 getRepoContributors('jquery', 'jquery', function(err, result){
   console.log("Errors:", err);
-  console.log("Result:", result);
+  console.log("In the callback")
+  console.log("Result:", result.body);
 })

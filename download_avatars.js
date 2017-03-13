@@ -1,4 +1,6 @@
 var request = require('request');
+var GITHUB_USER = 'vladimir-grigore';
+var GITHUB_TOKEN = '91b2f0714f02e3d8c25476ded3ba6764e53fbdc1';
 
 console.log('Welcome to the GitHub Avatar Downloader!');
 

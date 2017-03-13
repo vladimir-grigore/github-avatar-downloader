@@ -12,7 +12,16 @@ function buildRequestURL(repoOwner, repoName){
 function getRepoContributors(repoOwner, repoName, cb) {
   // TODO implement the function
   let url = buildRequestURL(repoOwner, repoName);
-  console.log(url);
+
+  request.get(url)
+         .on('error', (err) => {
+            throw err;
+          })
+         .on('response', (response) => {
+            console.log('Response Status Code: ', response.statusCode);
+            console.log('Response Status Message:', response.statusMessage);
+            // console.log(response);
+         });
 }
 
 getRepoContributors('jquery', 'jquery', function(err, result){

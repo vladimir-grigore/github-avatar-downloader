@@ -1,3 +1,3 @@
 module.exports = function downloadImageByURL(url, filePath) {
-  console.log("^^^^^^^^^^^^^^^^^^^^^^^^^")
+  console.log(url + '____' + filePath)
 }

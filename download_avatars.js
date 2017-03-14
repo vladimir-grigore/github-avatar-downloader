@@ -7,8 +7,12 @@ console.log('Welcome to the GitHub Avatar Downloader!');
 
 //Build a custom API request url
 function buildRequestURL(repoOwner, repoName){
-  var requestURL = `https://${GITHUB_USER}:${GITHUB_TOKEN}@api.github.com/repos/${repoOwner}/${repoName}/contributors`;
-  return requestURL;
+  return `https://${GITHUB_USER}:${GITHUB_TOKEN}@api.github.com/repos/${repoOwner}/${repoName}/contributors`;
+}
+
+//Build a custom filepath for each avatar
+function buildFilepath(name){
+  return `./avatars/${name}.jpg`;
 }
 
 function getRepoContributors(repoOwner, repoName, cb) {
@@ -46,8 +50,9 @@ getRepoContributors('jquery', 'jquery', function(err, result) {
   if (result && result.length){
     //iterate through each item and display the avatar_url
     result.forEach((item) => {
-      downloadImageByURL();
-      console.log(item.avatar_url);
+      //download each image to a specified path
+      downloadImageByURL(item.avatar_url, buildFilepath(item.login));
+      // console.log(item.avatar_url);
     })
   } else {
     console.log("Nothing to display.")

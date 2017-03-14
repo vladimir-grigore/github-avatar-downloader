@@ -24,18 +24,20 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
   //Make the request and return the body
   request(options, (err, response, body) => {
-    if (err) {
-      console.log("ERROR:", err)
-      return false;
-    }
-    console.log(JSON.parse(body));
+    cb(err, JSON.parse(body));
   });
 }
 
-//Call the getRepoContributors function and handle error
+//Call the getRepoContributors function and handle errors
 getRepoContributors('jquery', 'jquery', function(err, result) {
   if (err) {
-    throw err;
+    console.log("ERROR:", err)
+    return false;
   }
-  console.log("Result:", result);
+
+  //iterate through each item and display the avatar_url
+  result.forEach((item) => {
+    console.log(item.avatar_url);
+    console.log("------------------------------------------------------");
+  })
 });

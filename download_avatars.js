@@ -24,7 +24,14 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
   //Make the request and return the body
   request(options, (err, response, body) => {
-    cb(err, JSON.parse(body));
+    if (response && response.statusCode !== 200) {
+      console.log("Response was not 200!", response);
+      return false;
+    }
+
+    if (body && body.length){
+      cb(err, JSON.parse(body));
+    }
   });
 }
 
@@ -35,9 +42,14 @@ getRepoContributors('jquery', 'jquery', function(err, result) {
     return false;
   }
 
-  //iterate through each item and display the avatar_url
-  result.forEach((item) => {
-    console.log(item.avatar_url);
-    console.log("------------------------------------------------------");
-  })
+  if (result && result.length){
+    //iterate through each item and display the avatar_url
+    result.forEach((item) => {
+      console.log("---------------------------------------------------");
+      console.log(item.avatar_url);
+    })
+  } else {
+    console.log("Nothing to display.")
+  }
+
 });

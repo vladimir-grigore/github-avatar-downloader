@@ -17,6 +17,7 @@ function buildFilepath(name){
 }
 
 function getRepoContributors(args, cb) {
+
   //Return an error message if the repoOwner and repoName
   //have not been specified
   if (args.length < 2){
@@ -65,7 +66,7 @@ getRepoContributors(args, function(err, result) {
     //iterate through each item and display the avatar_url
     result.forEach((item) => {
       //download each image to a specified path
-      // downloadImageByURL(item.avatar_url, buildFilepath(item.login));
+      downloadImageByURL(item.avatar_url, buildFilepath(item.login));
     })
   } else {
     console.log("Nothing to display.");

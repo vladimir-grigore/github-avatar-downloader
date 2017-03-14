@@ -24,7 +24,11 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
   //Make the request and return the body
   request(options, (err, response, body) => {
-    // console.log(body);
+    if (err) {
+      console.log("ERROR:", err)
+      return false;
+    }
+    console.log(JSON.parse(body));
   });
 }
 

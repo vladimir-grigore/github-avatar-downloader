@@ -48,11 +48,12 @@ getRepoContributors('jquery', 'jquery', function(err, result) {
   }
 
   if (result && result.length){
+
     //iterate through each item and display the avatar_url
     result.forEach((item) => {
+
       //download each image to a specified path
       downloadImageByURL(item.avatar_url, buildFilepath(item.login));
-      // console.log(item.avatar_url);
     })
   } else {
     console.log("Nothing to display.")

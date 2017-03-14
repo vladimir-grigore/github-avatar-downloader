@@ -1,4 +1,5 @@
 var request = require('request');
+var downloadImageByURL = require('./downloadImageByURL');
 const GITHUB_USER = 'vladimir-grigore';
 const GITHUB_TOKEN = '91b2f0714f02e3d8c25476ded3ba6764e53fbdc1';
 
@@ -45,7 +46,7 @@ getRepoContributors('jquery', 'jquery', function(err, result) {
   if (result && result.length){
     //iterate through each item and display the avatar_url
     result.forEach((item) => {
-      console.log("---------------------------------------------------");
+      downloadImageByURL();
       console.log(item.avatar_url);
     })
   } else {

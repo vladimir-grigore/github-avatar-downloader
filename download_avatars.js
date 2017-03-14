@@ -1,3 +1,4 @@
+var args = process.argv.slice(2);
 var request = require('request');
 var downloadImageByURL = require('./downloadImageByURL');
 const GITHUB_USER = 'vladimir-grigore';
@@ -15,9 +16,16 @@ function buildFilepath(name){
   return `./avatars/${name}.jpg`;
 }
 
-function getRepoContributors(repoOwner, repoName, cb) {
-  //build the request url
-  let queryUrl = buildRequestURL(repoOwner, repoName);
+function getRepoContributors(args, cb) {
+  //Return an error message if the repoOwner and repoName
+  //have not been specified
+  if (args.length < 2){
+    console.log("Please enter the repoOwner and repoName");
+  } else {
+    //build the request url
+    var queryUrl = buildRequestURL(args[0], args[1]);
+  }
+  console.log(queryUrl);
 
   //construct an option object to hold our request url and user-agent
   var options = {
@@ -45,11 +53,11 @@ function getRepoContributors(repoOwner, repoName, cb) {
 }
 
 //Call the getRepoContributors function and handle errors
-getRepoContributors('jquery', 'jquery', function(err, result) {
+getRepoContributors(args, function(err, result) {
 
   //Handle any errors
   if (err) {
-    console.log("ERROR:", err)
+    console.log("ERROR:", err);
     return false;
   }
 
@@ -57,10 +65,10 @@ getRepoContributors('jquery', 'jquery', function(err, result) {
     //iterate through each item and display the avatar_url
     result.forEach((item) => {
       //download each image to a specified path
-      downloadImageByURL(item.avatar_url, buildFilepath(item.login));
+      // downloadImageByURL(item.avatar_url, buildFilepath(item.login));
     })
   } else {
-    console.log("Nothing to display.")
+    console.log("Nothing to display.");
   }
 
 });

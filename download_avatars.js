@@ -29,11 +29,14 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
   //Make the request and return the body
   request(options, (err, response, body) => {
+
+    //Handle any response that is not 200
     if (response && response.statusCode !== 200) {
       console.log("Response was not 200!", response);
       return false;
     }
 
+    //Pass the parsed json to the callback function
     if (body && body.length){
       cb(err, JSON.parse(body));
     }
@@ -42,6 +45,8 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
 //Call the getRepoContributors function and handle errors
 getRepoContributors('jquery', 'jquery', function(err, result) {
+
+  //Handle any errors
   if (err) {
     console.log("ERROR:", err)
     return false;

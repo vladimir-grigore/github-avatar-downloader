@@ -24,12 +24,14 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
   //Make the request and return the body
   request(options, (err, response, body) => {
-    console.log(body);
+    // console.log(body);
   });
 }
 
 //Call the getRepoContributors function and handle error
 getRepoContributors('jquery', 'jquery', function(err, result) {
-  console.log("Errors:", err);
+  if (err) {
+    throw err;
+  }
   console.log("Result:", result);
 });

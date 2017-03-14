@@ -17,6 +17,7 @@ function buildFilepath(name){
 }
 
 function getRepoContributors(args, cb) {
+  var queryUrl = '';
 
   //Return an error message if the repoOwner and repoName
   //have not been specified
@@ -24,9 +25,8 @@ function getRepoContributors(args, cb) {
     console.log("Please enter the repoOwner and repoName");
   } else {
     //build the request url
-    var queryUrl = buildRequestURL(args[0], args[1]);
+    queryUrl = buildRequestURL(args[0], args[1]);
   }
-  console.log(queryUrl);
 
   //construct an option object to hold our request url and user-agent
   var options = {
@@ -67,7 +67,7 @@ getRepoContributors(args, function(err, result) {
     result.forEach((item) => {
       //download each image to a specified path
       downloadImageByURL(item.avatar_url, buildFilepath(item.login));
-    })
+    });
   } else {
     console.log("Nothing to display.");
   }

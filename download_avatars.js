@@ -40,6 +40,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
     if (body && body.length){
       cb(err, JSON.parse(body));
     }
+
   });
 }
 
@@ -53,10 +54,8 @@ getRepoContributors('jquery', 'jquery', function(err, result) {
   }
 
   if (result && result.length){
-
     //iterate through each item and display the avatar_url
     result.forEach((item) => {
-
       //download each image to a specified path
       downloadImageByURL(item.avatar_url, buildFilepath(item.login));
     })
